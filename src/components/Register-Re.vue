@@ -122,15 +122,15 @@ export default {
   components: { Field, Form, ErrorMessage },
   data() {
     return {
-      name: yup.string().required("اسم خود را وارد کنید"),
+      name: yup.string().required(),
       email: yup
         .string()
-        .required("ایمیل خود را وارد کنید")
-        .email("ایمیل نامعتر است"),
+        .required()
+        .email(),
       password: yup
         .string()
-        .required("پسورد خود را وارد کنید")
-        .min(6, "پسورد نباید کمتر از 6 کاراکتر باشد"),
+        .required()
+        .min(6),
       confirmPassword: yup
         .string()
         .required()

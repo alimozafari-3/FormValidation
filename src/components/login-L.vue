@@ -49,12 +49,12 @@ export default {
     const loginformschema = yup.object({
       email: yup
         .string()
-        .required("ایمیل را وارد کنید")
-        .email("ایمیل نامعتبر است"),
+        .required()
+        .email(),
       password: yup
         .string()
-        .required("کلمه عبور را وارد کنید")
-        .min(5, "کلمه عبور باید بیشتر از 5 کارکتر باشد"),
+        .required()
+        .min(5),
     });
     return {
       loginformschema,
