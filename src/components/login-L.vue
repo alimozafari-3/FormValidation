@@ -2,7 +2,7 @@
   <div class="card-front">
     <div class="center-wrap">
       <div class="section text-center">
-        <Form @submit="Login">
+        <Form @submit="Login" :validation-schema="loginformschema">
           <h4 class="mb-4 pb-3">Log In</h4>
           <div class="form-group">
             <Field
@@ -12,7 +12,7 @@
               id="logemail"
               autocomplete="off"
               name="email"
-              :rules="emailrul"
+              :validate-on-input="true"
             />
             <i class="input-icon uil uil-at"></i>
           </div>
@@ -25,7 +25,7 @@
               id="logpass"
               autocomplete="off"
               name="password"
-              :rules="passwordrul"
+              :validate-on-input="true"
             />
             <i class="input-icon uil uil-lock-alt"></i>
           </div>
@@ -42,22 +42,29 @@
 
 <script>
 import { Field, Form, ErrorMessage } from "vee-validate";
-import * as yup from 'yup'
+import * as yup from "yup";
 export default {
   components: { Field, Form, ErrorMessage },
   data() {
+    const loginformschema = yup.object({
+      email: yup
+        .string()
+        .required("ایمیل را وارد کنید")
+        .email("ایمیل نامعتبر است"),
+      password: yup
+        .string()
+        .required("کلمه عبور را وارد کنید")
+        .min(5, "کلمه عبور باید بیشتر از 5 کارکتر باشد"),
+    });
     return {
-      emailrul: yup.string().required("ایمیل را وارد کنید").email("ایمیل نامعتبر است"),
-      passwordrul: yup.string().required("کلمه عبور را وارد کنید").min(5,'کلمه عبور باید بیشتر از 5 کارکتر باشد'),
+      loginformschema,
     };
   },
-  methods: {
-    Login(values) {
-      console.log(values);
-    },
-   
-    
-  },
+  methods:{
+    Login(valus){
+      console.log(valus);
+    }
+  }
 };
 </script>
 
